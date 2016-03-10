@@ -2,54 +2,54 @@
 
 console.log('started');
 
-var dataArray = [];
+var digitsArray = [];
 var bubbleSorter;
 
 //constructor
-function BubbleSorter (dataArray, array) {
+function BubbleSorter (digitsArray, divsArray) {
   this.i = 0;
   this.j = 0;
-  this.dataArray = dataArray;
-  this.array = array;
-  console.log(array);
+  this.digitsArray = digitsArray;
+  this.divsArray = divsArray;
+  console.log(divsArray);
   this.sort = function(){
     //remove focus and highlight
     this.clearHighlithing();
-    if(this.i == array.length - 1) {
-      array[this.j].setAttribute('sorted', '');
+    if(this.i == divsArray.length - 1) {
+      divsArray[this.j].setAttribute('sorted', '');
       return null;
     }
 
-    array[this.j].setAttribute('focused', '');
-    array[this.j+1].setAttribute('focused', '');
+    divsArray[this.j].setAttribute('focused', '');
+    divsArray[this.j+1].setAttribute('focused', '');
 
-    var valueOne = dataArray[this.j];
-    var valueTwo = dataArray[this.j+1];
+    var valueOne = digitsArray[this.j];
+    var valueTwo = digitsArray[this.j+1];
 
     if(valueOne > valueTwo){
-      array[this.j].setAttribute('swaped', '');
-      array[this.j+1].setAttribute('swaped', '');
-      var temp = dataArray[this.j];
-      dataArray[this.j] = dataArray[this.j+1];
-      dataArray[this.j+1] = temp;
-      for(var ii = 0; ii < dataArray.length; ii++){
-        array[ii].innerHTML = dataArray[ii];
+      divsArray[this.j].setAttribute('swaped', '');
+      divsArray[this.j+1].setAttribute('swaped', '');
+      var temp = digitsArray[this.j];
+      digitsArray[this.j] = digitsArray[this.j+1];
+      digitsArray[this.j+1] = temp;
+      for(var ii = 0; ii < digitsArray.length; ii++){
+        divsArray[ii].innerHTML = digitsArray[ii];
       }
-      console.log(dataArray);
+      console.log(digitsArray);
 
     }
     this.j++;
-    if(this.j == array.length - 1 - this.i) {
-      array[this.j].setAttribute('sorted', '');
+    if(this.j == divsArray.length - 1 - this.i) {
+      divsArray[this.j].setAttribute('sorted', '');
       this.j=0;
       this.i++;
     }
   };
 
   this.clearHighlithing = function(){
-    for(var ii = 0; ii<this.array.length; ii++){
-      if(this.array[ii].hasAttribute('focused')) this.array[ii].removeAttribute('focused');
-      if(this.array[ii].hasAttribute('swaped')) this.array[ii].removeAttribute('swaped');
+    for(var ii = 0; ii<divsArray.length; ii++){
+      if(divsArray[ii].hasAttribute('focused')) divsArray[ii].removeAttribute('focused');
+      if(divsArray[ii].hasAttribute('swaped')) divsArray[ii].removeAttribute('swaped');
     }
   }
 
@@ -65,12 +65,12 @@ buttonSort.onclick = function(){
 function onButtonSortClick(){
   var inputString = document.getElementsByTagName('input')[0].value;
   try{
-    dataArray = validateInput(inputString);
+    digitsArray = validateInput(inputString);
   }catch(e){
     alert(e.message);
     return;
   }
-  if(dataArray) createElementsRow(dataArray);
+  if(digitsArray) createElementsRow(digitsArray);
 }
 
 var buttonCancel = document.getElementById('back');
@@ -79,8 +79,8 @@ buttonCancel.onclick = function(){
 }
 
 function onButtonCancelClick(bubbleSorter){
-  bubbleSorter.dataArray = [];
-  bubbleSorter.array = [];
+  bubbleSorter.digitsArray = [];
+  bubbleSorter.divsArray = [];
   bubbleSorter.i = 0;
   bubbleSorter.j = 0;
   document.getElementById('inputDiv').style.display = 'initial';
@@ -99,39 +99,39 @@ function validateInput(inputString){
       throw new Error('Please fill in numbers to be sorted');
       return null;
     }
-    var dataArray = inputString.split(' ');
-    for(var i=0; i<dataArray.length; i++){
-      if(dataArray[i].trim().length == 0) {
-        dataArray.splice(i,1);
+    var digitsArray = inputString.split(' ');
+    for(var i=0; i<digitsArray.length; i++){
+      if(digitsArray[i].trim().length == 0) {
+        digitsArray.splice(i,1);
         i--;
         continue;
       }
-      console.log(dataArray[i]);
-      if(isNaN(dataArray[i])){
-        throw new Error(dataArray[i]+' is not a number!');
+      console.log(digitsArray[i]);
+      if(isNaN(digitsArray[i])){
+        throw new Error(digitsArray[i]+' is not a number!');
         return null;
       }
     }
-  return dataArray;
+  return digitsArray;
 }
 
-function createElementsRow(dataArray){
-  var array = [];
-  for(var i = 0; i<dataArray.length; i++){
+function createElementsRow(digitsArray){
+  var divsArray = [];
+  for(var i = 0; i<digitsArray.length; i++){
     var dataCell = document.createElement('div');
     dataCell.setAttribute('class', 'element');
-    dataCell.innerHTML = dataArray[i];
+    dataCell.innerHTML = digitsArray[i];
     element.appendChild(dataCell);
-    array.push(dataCell);
+    divsArray.push(dataCell);
   }
   //create object with all variables
-  createBubbleSorter(dataArray, array);
+  createBubbleSorter(digitsArray, divsArray);
   //change page content
   showSortingPage();
 }
 
-function createBubbleSorter(dataArray, array){
-  bubbleSorter = new BubbleSorter(dataArray, array);
+function createBubbleSorter(digitsArray, divsArray){
+  bubbleSorter = new BubbleSorter(digitsArray, divsArray);
 }
 
 function showSortingPage(){

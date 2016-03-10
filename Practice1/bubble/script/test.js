@@ -12,13 +12,13 @@ describe('Validate Import', function() {
 describe('Create Elemets Row', function() {
     it('Should set div element with class "element" for each number', function () {
       assert.equal(document.getElementsByClassName('element').length, 0);
-      var dataArray = [2, 6, 4, 1];
-      var array = [];
-      createElementsRow(dataArray);
+      var digitsArray = [2, 6, 4, 1];
+      var divsArray = [];
+      createElementsRow(digitsArray);
 
       for(var i = 0; i<document.getElementsByClassName('element').length; i++){
         assert.equal(document.getElementsByClassName('element')[i].getAttribute('class'), 'element');
-        assert.equal(document.getElementsByClassName('element')[i].innerHTML, dataArray[i]);
+        assert.equal(document.getElementsByClassName('element')[i].innerHTML, digitsArray[i]);
       }
 
     });
@@ -35,24 +35,24 @@ describe('Sort', function() {
     it('should update variables and screen', function () {
       var bubbleSorter = new BubbleSorter([4,0],[document.createElement('div'),
       document.createElement('div')]);
-      bubbleSorter.array[0].setAttribute('class', 'element');
-      bubbleSorter.array[1].setAttribute('class', 'element');
-      bubbleSorter.array[0].setAttribute('swaped', '');
-      bubbleSorter.array[0].setAttribute('focused', '');
+      bubbleSorter.divsArray[0].setAttribute('class', 'element');
+      bubbleSorter.divsArray[1].setAttribute('class', 'element');
+      bubbleSorter.divsArray[0].setAttribute('swaped', '');
+      bubbleSorter.divsArray[0].setAttribute('focused', '');
 
       bubbleSorter.clearHighlithing();
 
-      assert.isNotOk(bubbleSorter.array[0].hasAttribute('swaped'));
-      assert.isNotOk(bubbleSorter.array[0].hasAttribute('focused'));
+      assert.isNotOk(bubbleSorter.divsArray[0].hasAttribute('swaped'));
+      assert.isNotOk(bubbleSorter.divsArray[0].hasAttribute('focused'));
 
       bubbleSorter.sort();
       assert.equal(bubbleSorter.i, 1);
       assert.equal(bubbleSorter.j, 0);
-      assert.isOk(bubbleSorter.array[bubbleSorter.array.length-1].hasAttribute('sorted'));
-      assert.equal(bubbleSorter.dataArray.join(), '0,4');
+      assert.isOk(bubbleSorter.divsArray[bubbleSorter.divsArray.length-1].hasAttribute('sorted'));
+      assert.equal(bubbleSorter.digitsArray.join(), '0,4');
       assert.equal(bubbleSorter.sort(), null);
-      assert.isOk(bubbleSorter.array[0].hasAttribute('sorted'));
-      assert.isOk(bubbleSorter.array[1].hasAttribute('sorted'));
+      assert.isOk(bubbleSorter.divsArray[0].hasAttribute('sorted'));
+      assert.isOk(bubbleSorter.divsArray[1].hasAttribute('sorted'));
 
     });
 });
@@ -65,8 +65,8 @@ describe('Cancel', function() {
       onButtonCancelClick(bubbleSorter);
       assert.equal(bubbleSorter.i, 0);
       assert.equal(bubbleSorter.j, 0);
-      assert.sameMembers(bubbleSorter.dataArray, []);
-      assert.sameMembers(bubbleSorter.array, []);
+      assert.sameMembers(bubbleSorter.digitsArray, []);
+      assert.sameMembers(bubbleSorter.divsArray, []);
       assert.equal(document.getElementById('inputDiv').style.display, 'initial');
       assert.equal(document.getElementById('sortingDiv').style.display, 'none');
       assert.equal(element.innerHTML, '');
