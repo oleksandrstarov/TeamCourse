@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+      <!-- подключаем стили Mocha, для отображения результатов -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+      <!-- подключаем библиотеку Mocha -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+      <!-- настраиваем Mocha: предстоит BDD-тестирование -->
+      <script>
+        mocha.setup('bdd');
+      </script>
+      <!-- подключаем chai -->
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script> -->
+      <script src="http://chaijs.com/chai.js" type="text/javascript"></script>
+      <!-- в chai есть много всего, выносим assert в глобальную область -->
+    <script>
+       var assert = chai.assert;
+      </script>
+    <title>
+      Bubble sorting visualisation
+    </title>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <h1>Bubble sorting visualisation</h1>
+    <div id ="inputDiv">Please set values to be sorted: <input type="text" name="fname">
+      <div id="sort" class="button">Sort it!</div>
+      <p>Note that only digits (with dot '.' for floats) are allowed.
+      You can use space as separator.</p>
+    </div>
+    <div id="sortingDiv">
+      <div id="result">
+      </div>
+      <div class="buttonsDiv">
+        <div id="back" class="button">Cancel</div>
+        <div id="next" class="button">Next</div>
+      </div>
+    </div>
+    <script src="script/script.js"></script>
+      <!-- в этом скрипте находятся спеки -->
+    <script src="script/test.js"></script>
+
+    <!-- в элементе с id="mocha" будут результаты тестов -->
+    <div id="mocha" style="clear:left;"></div>
+    <!-- запустить тесты! -->
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
